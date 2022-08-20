@@ -2,6 +2,15 @@ import Fastify from 'fastify'
 import Env from '@fastify/env'
 import homeRoute from '@/routes/home'
 
+declare module 'fastify' {
+  interface FastifyInstance {
+    config: {
+      NODE_ENV: string,
+      SOME_ENV_VAR: string,
+    };
+  }
+}
+
 (async () => {
   // instance
   const fastify = Fastify({ logger: true });
