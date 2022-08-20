@@ -1,14 +1,37 @@
 import Fastify from 'fastify'
+import Env from '@fastify/env'
 import homeRoute from '@/routes/home'
 
-const fastify = Fastify({ logger: true })
+(async () => {
+  // instance
+  const fastify = Fastify({ logger: true });
 
-fastify.register(homeRoute)
+  // plugins
+  void fastify.register(Env, {
+    dotenv: true,
+    schema: {
+      type: 'object',
+      required: [
+        'NODE_ENV',
+        'SOME_ENV_VAR'
+      ],
+      properties: {
+        NODE_ENV: { type: 'string' },
+        SOME_ENV_VAR: { type: 'string' },
+      }
+    }
+  })
 
-fastify.listen({ port: 8000 }, function (err, address) {
-  if (err) {
-    fastify.log.error(err)
-    process.exit(1)
-  }
-  console.log(`server listening on ${address}`)
-})
+  // routes
+  void fastify.register(homeRoute)
+
+  // server
+  void fastify.listen({ port: 8000 }, function (err, address) {
+    if (err) {
+      fastify.log.error(err)
+      process.exit(1)
+    }
+    console.log(process.env.NODE_ENV)
+    console.log(`server listening on ${address}`)
+  })
+})();
