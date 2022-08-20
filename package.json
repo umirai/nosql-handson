@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "do": "ts-node -r tsconfig-paths/register src/scripts/index.ts",
-    "dev": "ts-node-dev -r tsconfig-paths/register src/server.ts"
+    "dev": "ts-node-dev -r tsconfig-paths/register src/app.ts"
   },
   "devDependencies": {
     "@types/node": "^18.7.8",
