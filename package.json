@@ -6,7 +6,7 @@
   "author": "Mirai Umeda",
   "license": "MIT",
   "scripts": {
-    "do": "ts-node-dev -r tsconfig-paths/register src/index.ts"
+    "do": "ts-node-dev -r tsconfig-paths/register src/script.ts"
   },
   "devDependencies": {
     "@types/node": "^18.7.8",
