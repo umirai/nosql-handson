@@ -11,7 +11,7 @@
 3. 現在のシェルセッションの環境変数として、json ファイルを保存したパスを設定
 
    ```sh
-   export GOOGLE_APPLICATION_CREDENTIALS="~/your/file/path/file-name.json"
+   export GOOGLE_APPLICATION_CREDENTIALS=~/your/file/path/file-name.json
    ```
 
 4. 起動
