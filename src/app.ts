@@ -6,7 +6,7 @@ declare module 'fastify' {
   interface FastifyInstance {
     config: {
       NODE_ENV: string,
-      SOME_ENV_VAR: string,
+      DB_NAME: string,
     };
   }
 }
@@ -22,11 +22,11 @@ declare module 'fastify' {
       type: 'object',
       required: [
         'NODE_ENV',
-        'SOME_ENV_VAR'
+        'DB_NAME'
       ],
       properties: {
         NODE_ENV: { type: 'string' },
-        SOME_ENV_VAR: { type: 'string' },
+        DB_NAME: { type: 'string' },
       }
     }
   })
