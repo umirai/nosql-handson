@@ -1,5 +1,6 @@
 import Fastify from 'fastify'
 import env from '@/plugins/env'
+import firebase from '@/plugins/firebase'
 import homeRoute from '@/routes/home'
 
 (async () => {
@@ -7,10 +8,11 @@ import homeRoute from '@/routes/home'
   const fastify = Fastify({ logger: true });
 
   // plugins
-  void fastify.register(env)
+  await fastify.register(env)
+  await fastify.register(firebase)
 
   // routes
-  void fastify.register(homeRoute)
+  await fastify.register(homeRoute)
 
   // server
   void fastify.listen({ port: 8000 }, function (err, address) {
