@@ -5,17 +5,39 @@ import homeRoute from '@/routes/home'
 
 (async () => {
   // instance
-  const fastify = Fastify({ logger: true });
+  const fastify = Fastify({
+    logger: {
+      transport: {
+        target: 'pino-pretty'
+      },
+      serializers: {
+        res(reply) {
+          return {
+            statusCode: reply.statusCode
+          }
+        },
+        req(request) {
+          return {
+            method: request.method,
+            url: request.url,
+            path: request.routerPath,
+            parameters: request.params,
+            headers: request.headers
+          }
+        }
+      }
+    }
+  });
 
   // plugins
-  await fastify.register(env)
-  await fastify.register(firebase)
+  fastify.register(env)
+  fastify.register(firebase)
 
   // routes
-  await fastify.register(homeRoute)
+  fastify.register(homeRoute)
 
   // server
-  void fastify.listen({ port: 8000 }, function (err, address) {
+  fastify.listen({ port: 8000 }, function (err, address) {
     if (err) {
       fastify.log.error(err.message)
       process.exit(1)
