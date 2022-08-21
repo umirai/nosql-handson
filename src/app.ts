@@ -1,33 +1,12 @@
 import Fastify from 'fastify'
+import logConfig from '@/configs/log'
 import env from '@/plugins/env'
 import firebase from '@/plugins/firebase'
 import homeRoute from '@/routes/home'
 
 (async () => {
   // instance
-  const fastify = Fastify({
-    logger: {
-      transport: {
-        target: 'pino-pretty'
-      },
-      serializers: {
-        res(reply) {
-          return {
-            statusCode: reply.statusCode
-          }
-        },
-        req(request) {
-          return {
-            method: request.method,
-            url: request.url,
-            path: request.routerPath,
-            parameters: request.params,
-            headers: request.headers
-          }
-        }
-      }
-    }
-  });
+  const fastify = Fastify({ logger: logConfig });
 
   // plugins
   fastify.register(env)
